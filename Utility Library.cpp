@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <utility>
-#
+#include <vector>
 
 using std::cout;
 
@@ -23,4 +23,6 @@ int main() {
 	복사가 불가능한 경우가 있다.
 	ex) 사용 예시 */
 	std::vector<int> myBigVec(10000, 2011);
+	std::vector<int> myVec;
+	myVec = std::move(myBigVec);
 }
