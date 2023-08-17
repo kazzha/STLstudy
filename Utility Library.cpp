@@ -6,6 +6,8 @@
 using std::cout;
 
 int main() {
+	// using namespace std; : std 네임스페이스에 속하는 요소를 끌어올려서 std::를 명시할 필요가
+	// 없어진다. 그러나 다른 네임스페이스에 예를들면 cout이라는 동명의 함수가 있으면 충돌발생가능.
 	/* 1. <algorithm> header
 	-> min, max, minmax function
 	: 최대, 최소 판정은 기본으로 미만 연산자(<)가 쓰이지만, 비교함수를 직접 지정할 수 있고
