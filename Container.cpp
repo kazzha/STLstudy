@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <deque>
 using namespace std;
 
 int main()
@@ -74,5 +75,11 @@ int main()
       vec.pop_back() : 마지막 요소 제거
       vec.push_back(elem) : vec의 끝에 elem의 복사본 추가
 
+     3) deque - vector와 비슷한 선형 배열 형태의 순차 컨테이너, <deque> 헤더 필요
+     vector와 다른 점: 시작 위치에 요소를 추가 또는 삭제 가능
+          -> 이를 위해 deq.push_front(elem), deq.pop_front(),deq.emplace_front(arg...) 를 추가로 제공
+
+     ex) deq.insert(deg.begin(),0) -> 0를 맨 앞에 넣음
+         deq.insert(deg.begin()+4,4) -> 맨 마지막에 4를 넣음
 
 }
