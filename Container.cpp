@@ -47,6 +47,7 @@ int main()
     * 소괄호와 중괄호의 차이
       std::vector<int> vec(10); : 10개의 요소를 가진 vector 객체 생성
       std::vector<int> vec2{10}; : 값이 10인 하나의 요소를 담은 vector 객체 생성
+
     * 크기 대 용량
       보통, vector의 크기(size, 요소 개수)는 용량(미리 확보된 공간, 최대 요소 개수)보다 작다.
 
@@ -57,6 +58,7 @@ int main()
       vec.shrink_to_fit() : vec의 용량을 현재 크기에 맞게 줄인다 - 절대적이지 않고, 런타임에서 요청 무시 가능
           
     * 요소 접근
+
       vec.front() : 벡터의 첫 요소 돌려줌
       vec.back() : 벡터의 마지막 요소 돌려줌
       vec[n]
@@ -81,5 +83,62 @@ int main()
 
      ex) deq.insert(deg.begin(),0) -> 0를 맨 앞에 넣음
          deq.insert(deg.begin()+4,4) -> 맨 마지막에 4를 넣음
+
+     4) list - double linked list. <list> 헤더 필요
+     -임의 접근을 지원하지 않음, 임의의 요소에 대한 접근이 느리다. 요소의 삽입과 삭제가 빠르다.
+     
+     *특별한 메서드
+     list.remove(val) : list에서 값이 val인 요소를 모두 제거
+     list.remove_if(pre) : 술어 pre를 만족하는 요소를 모두 제거
+     list.unique() : 값이 같은 요소를 제거
+     list.splice(pos, ...) : pos 앞에 다른 목록의 요소를 삽입
+          ex) list1.splice( std::find ( list.begin() , list.end(), 15 ), list2 )
+
+    5) forward_list : single linked list. <forward_list> 헤더 필요
+    전진만 가능. 자신의 크기를 알지 못함. 전진 전용이므로 반복자 감소가 불가능(itr-- 가 없다)
+
+    *특별한 메서드
+
+    forw.before_begin() : 첫 요소 앞을 가리키는 반복자를 돌려준다.
+          ex)  std::forward_list<int> myList = { 2, 3, 4 };
+
+               auto beforeBeginIt = myList.before_begin();
+               myList.insert_after(beforeBeginIt, 1);
+
+               for (const auto& value : myList) {
+                  std::cout << value << " ";
+               }
+    forw.emplace_after(pos, args...)
+    forw.emplace_front(args...) : forw의 시작 위치에 args...를 생성자 인수로 사용해 새 요소 생성
+    forw.erase_after(pos, ...)
+    forw.insert_after(pos, ...)
+
+    3. 연관 컨테이너
+    1) 순서 있는 연관 컨테이너
+    *키와 값
+        키: 정렬 가능해야 함, 복사 가능, 이동 가능이어야 함
+        값: 기본 생성 가능해야 하고 복사 가능, 이동 가능이어야 함
+    
+     -키와 값은 std::pair를 생성, 키: p.first이고 값이 p.second
+        ex) std::multimap<char, int> mulm= {{'a', 10}, {'b', 30}}
+            for( auto p : mulm ) { std::cout << p.first << "," << p.second }
+
+    *비교 기준
+        기본 : std::less(1, 2, 3, 4...로 정렬)
+        큰 수 부터 배열하려면...
+        ex) std::map<int, std::string, std::greater<int>> int25tr{ {5,"오"}, {1,"일"}, {3,"삼"} };
+        
+    *특별한 검색 함수
+        set.count(key) : 키가 key인 값들의 개수를 돌려줌
+        set.find(key) : key에 해당하는 키를 가리키는 반복자를 돌려준다. 없으면 end()를 돌려줌
+
+    *요소의 삽입과 삭제
+        insert와 emplace 사용 가능.
+        erase(key) : 키가 key에 해당하는 모든 쌍을 삭제하고 그 개수를 돌려줌
+
+   *std::map
+        : vector와 비슷하나 색인으로 거의 모든 형식이 가능. at 메서드도 지원
+
+    2) 순서 없는 연관 컨테이너
 
 }
