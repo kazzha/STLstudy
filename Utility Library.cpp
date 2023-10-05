@@ -19,7 +19,7 @@ int main() {
 	cout << pairSeq.first << "," << pairSeq.second;
 
 	/* 2. <utility> header
-	-> std::move : 원본 객체의 값ㅇ르 새 객체로 이동(복사x)
+	1) std::move : 원본 객체의 값을 새 객체로 이동(복사x)
 	원본 객체 r-value 참조를 함. 만일 이동의미론을 적용할 수 없으면 복사의미론을 사용
 	* 이점: 이동이 메모리 할당과 해제가 필요없어 복사보다 값쌈, std::thread 나 std::lock와 같이
 	복사가 불가능한 경우가 있다.
@@ -27,4 +27,25 @@ int main() {
 	std::vector<int> myBigVec(10000, 2011);
 	std::vector<int> myVec;
 	myVec = std::move(myBigVec);
+
+	2) std::forward = 받은 형태로 안전하게 그대로 전달하는 함수
+	              ( L-Value로 들어오면 L-Value로 리턴, R-Value로 들어오면 R-Value로 리턴)
+
+	3) std::swap(A, B) : move로 구현됨
+	4) std::pair<타입, 타입>( , )
+		-> 비교연산자를 지원해서 먼저 pair1의 first와 pair2의 first를 비교,
+		같을 시 둘의 second 비교
+	* std::make_pair - 요소 형식을 지정하지 않아도 됨
+		ex) auto can = std::make_pair("str", 3.14);
+
+	5) std::tuple <tuple> 필요
+	-pair와 방식은 같고 요소 개수 상관이 없다.
+	-요소가 2개인 tuple은 pair로 변환 가능
+	-tuple의 i번째 요소 : std::get<i-1>(tuple이름)
+	-make_tuple 가능
+
+	6) std::tie : 기존 변수들을 참조하는 요소들로 이루어진 튜플 생성 가능
+	   std::ignore : 
+	
+	
 }

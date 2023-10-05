@@ -175,4 +175,7 @@ int main()
     -> 우선순위가 높은 값부터 대기열의 앞쪽에 놓인다
     ex) push(7) -> push(2) -> push(8) -> 결과물: 8 7 2
      단, 비교에는 less가 쓰이나 내림차순임
+     
+    * 오름차순 정렬을 하고 싶을때 : priority_queue<int, vector<int>, greater<int>>
+    
 }
